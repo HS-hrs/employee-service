@@ -6,12 +6,14 @@ import HS_hrs.employee_service.Entity.UserEmploymentEntity;
 import HS_hrs.employee_service.Dto.UserEmploymentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
+    @Autowired
     private final EmployeeRepository employeeRepository;
 
     @Transactional
