@@ -1,5 +1,6 @@
 package HS_hrs.employee_service.Service;
 
+import HS_hrs.employee_service.Kafka.EmployeeKafkaProducer;
 import org.springframework.stereotype.Service;
 import HS_hrs.employee_service.Repository.EmployeeRepository;
 import HS_hrs.employee_service.Entity.UserEmploymentEntity;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     @Autowired
     private final EmployeeRepository employeeRepository;
+    private final EmployeeKafkaProducer employeeKafkaProducer;
 
     @Transactional
     public void updateUserEmployment(UserEmploymentDto userEmploymentDto) {
@@ -42,6 +44,8 @@ public class EmployeeService {
     }
 
     public UserEmploymentEntity createUserEmployment(UserEmploymentDto userEmploymentDto) {
-        return employeeRepository.save(UserEmploymentEntity.toEntity(userEmploymentDto));
+        UserEmploymentEntity saved = employeeRepository.save(UserEmploymentEntity.toEntity(userEmploymentDto));
+       employeeKafkaProducer.sendEmployeeUserIdEvent(saved.getUserId());
+        return saved;
     }
 }

@@ -42,6 +42,8 @@ dependencies {
 	implementation 'com.h2database:h2'
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'com.example:ms-common-lib:1.0-SNAPSHOT'
 }
 
 dependencyManagement {
